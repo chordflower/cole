@@ -463,4 +463,14 @@
     <module>cole-lanterna</module>
     <module>cole-netbeans-plugin</module>
   </modules>
+  <pluginRepositories>
+    <pluginRepository>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>bintray-puravida-software-repo</id>
+      <name>bintray-plugins</name>
+      <url>https://dl.bintray.com/puravida-software/repo</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>

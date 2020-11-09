@@ -22,9 +22,16 @@
   </poweredBy>
   <custom>
     <fluidoSkin>
-      <topBarEnabled>true</topBarEnabled>
-      <sideBarEnabled>false</sideBarEnabled>
+      <topBarEnabled>false</topBarEnabled>
+      <sideBarEnabled>true</sideBarEnabled>
       <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+      <gitHub>
+        <projectId>chordflower/cole</projectId>
+        <ribbonOrientation>right</ribbonOrientation>
+        <ribbonColor>black</ribbonColor>
+      </gitHub>
+      <leftColumnClass>span3</leftColumnClass>
+      <bodyColumnClass>span9</bodyColumnClass>
     </fluidoSkin>
   </custom>
 </project>
