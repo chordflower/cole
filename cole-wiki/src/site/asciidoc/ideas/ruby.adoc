@@ -1,0 +1,223 @@
+= Ruby
+
+These are the features being considered for cole based on ruby.
+
+== First-class continuations
+
+____
+
+First-class continuations are a language's ability to completely control the execution order of instructions. They can
+be used to jump to a function that produced the call to the current function, or to a function that has previously
+exited. One can think of a first-class continuation as saving the execution state of the program. It is important to
+note that true first-class continuations do not save program data – unlike a process image – only the execution context.
+
+____
+
+== Exceptions
+
+[source,ruby]
+----
+begin
+  # Do something nifty
+  raise SomeError, "This is the error message!"  # Uh-oh!
+rescue SomeError
+  # This is executed when a SomeError exception
+  # is raised
+rescue AnotherError => error
+  # Here, the exception object is referenced from the
+  # `error' variable
+rescue
+  # This catches all exceptions derived from StandardError
+  retry # This executes the begin section again
+else
+  # This is executed only if no exceptions were raised
+ensure
+  # This is always executed, exception or not
+end
+----
+
+== Operator Overloading
+
+____
+
+Operator overloading is syntactic sugar, and is used because it allows programming using notation nearer to the
+target domain and allows user-defined types a similar level of syntactic support as types built into a language.
+It is common, for example, in scientific computing, where it allows computing representations of mathematical objects
+to be manipulated with the same syntax as on paper.
+
+____
+
+[source,ruby]
+----
+class Pet
+  def +(pet)
+    p = Pet.new
+    p.super_powers = self.super_powers + " and also " + pet.super_powers
+    return p
+  end
+end
+----
+
+== Symbols
+
+____
+
+A symbol in computer programming is a primitive data type whose instances have a unique human-readable form. Symbols
+can be used as identifiers. In some programming languages, they are called atoms. Uniqueness is enforced by holding
+them in a symbol table. The most common use of symbols by programmers is for performing language reflection
+(particularly for callbacks), and most common indirectly is their use to create object linkages.
+
+In Ruby, symbols can be created with a literal form, or by converting a string. They can be used as an identifier
+or an interned string. Two symbols with the same contents will always refer to the same object. It is considered a
+best practice to use symbols as keys to an associative array in Ruby.
+
+The following is a simple example of a symbol literal in Ruby:
+
+____
+
+[source,ruby]
+----
+my_symbol = :a
+my_symbol = :"an identifier"
+----
+
+____
+
+Strings can be coerced into symbols, vice versa:
+
+____
+
+[source,ruby]
+----
+irb(main):001:0> my_symbol = "Hello, world!".intern
+=> :"Hello, world!"
+irb(main):002:0> my_symbol = "Hello, world!".to_sym
+=> :"Hello, world!"
+irb(main):003:0> my_string = :hello.to_s
+=> "hello"
+----
+
+____
+
+Symbols are objects of the Symbol class in Ruby:
+
+____
+
+[source,ruby]
+----
+irb(main):004:0> my_symbol = :hello_world
+=> :hello_world
+irb(main):005:0> my_symbol.length
+=> 11
+irb(main):006:0> my_symbol.class
+=> Symbol
+----
+
+____
+
+Symbols are commonly used to dynamically send messages to (call methods on) objects:
+
+____
+
+[source,ruby]
+----
+irb(main):007:0> "aoboc".split("o")
+=> ["a", "b", "c"]
+irb(main):008:0> "aoboc".send(:split, "o") # same result
+=> ["a", "b", "c"]
+----
+
+____
+
+Symbols as keys of an associative array:
+
+____
+
+[source,ruby]
+----
+irb(main):009:0> my_hash = { a: "apple", b: "banana" }
+=> {:a=>"apple", :b=>"banana"}
+irb(main):010:0> my_hash[:a]
+=> "apple"
+irb(main):011:0> my_hash[:b]
+=> "banana"
+----
+
+== Regular Expressions
+
+____
+
+A regular expression is a special sequence of characters that helps you match or find other strings or sets of strings
+using a specialized syntax held in a pattern.
+
+A regular expression literal is a pattern between slashes or between arbitrary delimiters followed by %r as follows
+
+____
+
+[source,ruby]
+----
+/pattern/
+/pattern/im    # option can be specified
+%r!/usr/local! # general delimited regular expression
+----
+
+== Default Arguments
+
+____
+
+A default argument is an argument to a function that a programmer is not required to specify. In most programming
+languages, functions may take one or more arguments.
+
+____
+
+[source,ruby]
+----
+def greeting(name = "Ruby programmer")
+  puts "Hello, #{name}"
+end
+----
+
+== String interpolation
+
+[source,ruby]
+----
+var = 3.14159
+"pi is #{var}"
+=> "pi is 3.14159"
+----
+
+== Pure Object Orientation
+
+____
+
+Ruby is object-oriented: every value is an object, including classes and instances of types that many other
+languages designate as primitives (such as integers, booleans, and "null"). Variables always hold references to
+objects. Every function is a method and methods are always called on an object. Methods defined at the top level
+scope become methods of the Object class. Since this class is an ancestor of every other class, such methods can be
+called on any object. They are also visible in all scopes, effectively serving as "global" procedures.
+
+____
+
+== Class methods and Variables
+
+____
+
+In Ruby, a method provides functionality to an Object. A class method provides functionality to a class itself,
+while an instance method provides functionality to one instance of a class.
+
+Consider the following Ruby class:
+
+____
+
+[source,ruby]
+----
+class SayHello
+  def self.from_the_class
+    "Hello, from a class method"
+  end
+
+  def from_an_instance
+    "Hello, from an instance method"
+  end
+end
+----

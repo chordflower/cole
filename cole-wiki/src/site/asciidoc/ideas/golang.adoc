@@ -1,0 +1,74 @@
+= GoLang
+
+These are the features being considered for cole based on golang or go from google.
+
+== Interfaces as structural type
+
+____
+
+The definition of an interface type lists required methods by name and type. Any object
+of type T for which functions exist matching all the required methods of interface type
+I is an object of type I as well. The definition of type T need not (and cannot) identify
+type I. For example, if Shape, Square and Circle are defined as:
+
+____
+
+[source,Go]
+----
+import "math"
+
+type Shape interface {
+    Area() float64
+}
+
+type Square struct { // Note: no "implements" declaration
+    side float64
+}
+
+func (sq Square) Area() float64 { return sq.side * sq.side }
+
+type Circle struct { // No "implements" declaration here either
+    radius float64
+}
+
+func (c Circle) Area() float64 { return math.Pi * math.Pow(c.radius, 2) }
+----
+
+____
+
+then both a Square and a Circle are implicitly a Shape and can be assigned to
+a Shape-typed variable.
+
+____
+
+== Spring cleaning included
+
+____
+
+Go enforces rules that are recommendations in other languages, for example banning
+cyclic dependencies, unused variables or imports, and implicit type conversions.
+
+____
+
+== Automatic formatting
+
+____
+
+Indentation, spacing, and other surface-level details of code are automatically
+standardized by the gofmt tool. 
+
+____
+
+== Automatic variable inference
+
+____
+
+A combined declaration/initialization operator was introduced that allows the programmer
+to write i := 3 or s := "Hello, world!", without specifying the types of variables used.
+
+____
+
+== Optional semicolons
+
+The optional use of semicolons at end of lines, since they are automatically added by the
+compiler when needed, using simple rules.

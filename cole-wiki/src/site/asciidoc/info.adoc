@@ -1,0 +1,12 @@
+= Cole
+
+A new programming language for the JVM.
+
+== Ideas
+
+There in a wiki page with ideas for cole link:ideas.html[here]
+
+== References
+
+* Logo based on http://www.fasticon.com[Icons by: FastIcon.com];
+* Cole is also based on https://coleandmarmalade.com/about/[Cole and Marmalade]

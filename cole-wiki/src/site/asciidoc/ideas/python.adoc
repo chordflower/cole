@@ -1,0 +1,96 @@
+= Python
+
+These are the features being considered for cole based on python.
+
+== Operators
+
+____
+
+Addition, subtraction, and multiplication are the same, but the behavior of division differs.
+There are two types of divisions in Python. They are floor division (or integer division) // and floating point/division.
+Python also added the ** operator for exponentiation.
+
+____
+
+Particularly, from http://python-history.blogspot.com/2010/08/why-pythons-integer-division-floors.html[here],
+this is really important stuff…
+
+And since, we are on operators maybe a type like BigDecimal or
+https://mathjs.org/docs/datatypes/bignumbers.html[math.js BigNumbers and Fraction types]
+also while one is in mathjs docs, go along and read about the other modules, they are cool…
+
+== Try-with-resource
+
+____
+
+The with statement, from Python 2.5 released in September 2006, which encloses a code block within a context manager
+(for example, acquiring a lock before the block of code is run and releasing the lock afterwards, or opening a file
+and then closing it), allowing Resource Acquisition Is Initialization (RAII)-like behavior and replaces a common
+try/finally idiom.
+
+____
+
+== Chained comparations
+
+____
+
+In Python, comparisons may be chained, for example a &lt;= b &lt;= c
+
+____
+
+Maybe this instead of a between keyword…
+
+== String literals
+
+____
+
+Python has various kinds of string literals:
+
+* Strings delimited by single or double quote marks. Unlike in Unix shells, Perl and Perl-influenced languages,
+ single quote marks and double quote marks function identically. Both kinds of string use the backslash () as
+ an escape character.
+* Triple-quoted strings, which begin and end with a series of three single or double quote marks. They may span
+ multiple lines and function like here documents in shells, Perl and Ruby.
+* Raw string varieties, denoted by prefixing the string literal with an r. Escape sequences are not interpreted;
+ hence raw strings are useful where literal backslashes are common, such as regular expressions and Windows-style
+ paths. Compare "@-quoting" in C#.
+
+____
+
+Maybe combine this with interpolation, for the first two string types and ditch the double quote part in favor for
+single quote.
+
+== Slices
+
+____
+
+Python has array index and array slicing expressions on lists, denoted as `a[key]`, `a[start:stop]` or `a[start:stop:step]`.
+Indexes are zero-based, and negative indexes are relative to the end. Slices take elements from the start index up to,
+but not including, the stop index. The third slice parameter, called step or stride, allows elements to be skipped and
+reversed. Slice indexes may be omitted, for example a[:] returns a copy of the entire list. Each element of a slice is
+a shallow copy.
+
+____
+
+== Complex Type
+
+Maybe implement the complex type from python.
+
+== Exceptions
+
+[source,python]
+----
+f = None
+try:
+    f = file("aFileName")
+    f.write(could_make_error())
+except IOError:
+    print("Unable to open file")
+except:  # catch all exceptions
+    print("Unexpected error")
+else:  # executed if no exceptions are raised
+    print("File write completed successfully")
+finally:  # clean-up actions, always executed
+    if f:
+        f.close()
+----

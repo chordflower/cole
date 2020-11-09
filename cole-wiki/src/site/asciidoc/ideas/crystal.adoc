@@ -1,0 +1,11 @@
+= Crystal
+
+These are the features being considered for cole based on crystal.
+
+== Non-nillable types
+
+____
+
+All types are non-nilable in Crystal, and nilable variables are represented as a union between the type and nil.
+
+____

@@ -1,0 +1,251 @@
+= C#
+
+These are the features being considered for cole based on C#.
+
+== Partial Types
+
+To allow classes to be partially defined, perhaps as a mechanism to reduce long
+inheritance chains, particularly with auto-generated code…
+
+[source,C#]
+----
+public partial class MyClass {
+    //...
+}
+----
+
+== Null coalescing operator
+
+This operator has the form of:
+
+[source,C#]
+----
+a = b ?? 'a';
+----
+
+And allows to specify a default value, in case of b being null.
+
+== Anonymous function
+
+In computer programming, an anonymous function (function literal, lambda abstraction
+, or lambda expression) is a function definition that is not bound to an identifier.
+Anonymous functions are often arguments being passed to higher-order functions, or
+used for constructing the result of a higher-order function that needs to return
+a function. If the function is only used once, or a limited number of times, an
+anonymous function may be syntactically lighter than using a named function. Anonymous
+functions are ubiquitous in functional programming languages and other languages with
+first-class functions, where they fulfil the same role for the function type as literals
+do for other data types. 
+
+[source,C#]
+----
+// the first int is the x' type
+// the second int is the return type
+// <see href="http://msdn.microsoft.com/en-us/library/bb549151.aspx" />
+Func<int,int> foo = x => x * x;
+Console.WriteLine(foo(7));
+----
+
+=== Properties
+
+This will alow to replace the barrage of getter/setter in other languages…
+
+[source,C#]
+----
+property MyProperty {
+  get {
+    return 3;
+  }
+  set {
+    //self.val = value;
+  }
+}
+----
+
+== Object and Collection Initializers
+
+I'm in love with this C# feature, it allows to initialize classes like this:
+
+[source,C#]
+----
+MyType type = new MyType {
+  Id: 3,
+  Age: 20,
+};
+----
+
+It is awesome…
+
+== Named Arguments and Optional Parameters
+
+____
+
+In another addition to C#, methods now support optional parameters with default
+values so that when you call such a method you can omit those parameters.
+
+____
+
+[source,C#]
+----
+class Car {
+  public void Accelerate(
+    double speed, int? gear = null, 
+    bool inReverse = false) { 
+    /* ... */ 
+  }
+}
+----
+
+____
+
+C# 4.0 will also let you call methods by specifying some arguments by name. In
+this way, you can pass an argument to an optional parameter without having to also
+pass arguments for all the parameters that come before it.
+
+____
+
+[source,C#]
+----
+myCar.Accelerate(55, inReverse: true);
+----
+
+== Async/Await functions
+
+In computer programming, the async/await pattern is a syntactic feature of many
+programming languages that allows an asynchronous, non-blocking function to be
+structured in a way similar to an ordinary synchronous function. It is semantically
+related to the concept of a coroutine and is often implemented using similar techniques,
+and is primarily intended to provide opportunities for the program to execute other
+code while waiting for a long-running, asynchronous task to complete, usually represented
+by promises or similar data structures.
+
+[source,C#]
+----
+public async Task<int> SumPageSizesAsync(IList<Uri> uris) 
+{
+    int total = 0;
+    foreach (var uri in uris) {
+        statusText.Text = string.Format("Found {0} bytes ...", total);
+        var data = await new WebClient().DownloadDataTaskAsync(uri);
+        total += data.Length;
+    }
+    statusText.Text = string.Format("Found {0} bytes total", total);
+    return total;
+}
+----
+
+== Safe navigation operator
+
+In object-oriented programming, the safe navigation operator (also known as optional
+chaining operator, safe call operator, null-conditional operator) is a binary operator
+that returns null if its first argument is null; otherwise it performs a dereferencing
+operation as specified by the second argument (typically an object member access or an
+array index). 
+
+[source,C#]
+----
+var name = article?.Author?.Name;
+----
+
+== String interpolation
+
+That is the ability to use local variables in string values without, the hassle of:
+
+----
+String out = "The value of " + val.name + " is " + val.value;
+----
+
+And instead something like:
+
+[source,C#]
+----
+String out = $"The value of {val.name} is {val.value}";
+----
+
+But perhaps with the following syntax:
+
+----
+String out = "The value of ${val.name} is ${val.value}";
+----
+
+Meaning that all strings can be interpolated…
+
+== nameof operator
+
+This is a short version of:
+
+----
+String out = val.class.getName();
+----
+
+That in C# is:
+
+[source,C#]
+----
+String out = nameof(val);
+----
+
+== Deconstruction
+
+That is the ability for something like this:
+
+[source,C#]
+----
+var (name, age) = new Person("John Doe", 30);
+----
+
+Where in this case name is "John Doe" and age is 30.
+
+== Digit Separator
+
+The ability to use &quot;_&quot; as a digit separator, allowing something like this:
+
+[source,C#]
+----
+long num3 = 1_000_000_000_000;
+----
+
+== Binary Literals
+
+The ability to specify numbers in binary form:
+
+[source,C#]
+----
+var num = 0b10001;
+----
+
+== Switch Expressions
+
+The ability for switches to be assigned as a return value or to a variable.
+
+[source,C#]
+----
+public static class SwitchExample {
+    public enum Directions {
+        Up,
+        Down,
+        Right,
+        Left,
+    };
+
+    public enum Orientation {
+        North,
+        South,
+        East,
+        West,
+    };
+
+    public static void Main() {
+        var direction = Directions.Right;
+        Console.WriteLine($"Map view direction is {direction}");
+
+        var orientation = direction switch {
+            Directions.Up    => Orientation.North,
+            Directions.Right => Orientation.East,
+            Directions.Down  => Orientation.South,
+            Directions.Left  => Orientation.West,
+        };
+        Console.WriteLine($"Cardinal orientation is {orientation}");
+    }
+}
+----

@@ -1,0 +1,18 @@
+= Haxe
+
+These are the features being considered for cole based on haxe.
+
+== Anonymous Types
+
+____
+
+Anonymous types are defined by denoting their structure explicitly, using a syntax that follows the mathematical
+record-based representation of a type. They can be used to implement structural typing for function arguments (see below),
+and can be given an alias with the keyword typedef:
+
+____
+
+[source,haxe]
+----
+typedef AliasForAnon = { a:Int, b:String, c:Float->Void };
+----

@@ -1,0 +1,14 @@
+= Ideas
+
+This is a page with ideas for the cole language, it is pretty much unstructured, since at first it will be a
+dumping ground for stuff I like in other languages…
+
+It is organized by subpages grouped by languages. Currently there are the following:
+
+* link:./ideas/python.html[Python];
+* link:./ideas/rust.html[Rust];
+* link:./ideas/haxe.html[Haxe];
+* link:./ideas/crystal.html[Crystal];
+* link:./ideas/ruby.html[Ruby];
+* link:./ideas/c-sharp.html[C-Sharp];
+* link:./ideas/golang.html[GoLang];

@@ -1,0 +1,32 @@
+= Rust
+
+These are the features being considered for cole based on rust.
+
+== Generics
+
+____
+
+Functions can be given generic parameters, which usually require the generic type to implement a certain trait or
+traits. Within such a function, the generic value can only be used through those traits. This means that a generic
+function can be type-checked as soon as it is defined.
+
+However, the implementation of Rust generics is similar to the typical implementation of C++ templates: a separate
+copy of the code is generated for each instantiation. This is called monomorphization and contrasts with the type
+erasure scheme typically used in Java and Haskell. The benefit of monomorphization is optimized code for each specific
+use case; the drawback is increased compile time and size of the resulting binaries.
+
+____
+
+== Pattern matching
+
+____
+
+Rust has an extremely powerful control flow operator called match that allows you to compare a value against a series
+of patterns and then execute code based on which pattern matches. Patterns can be made up of literal values, variable
+names, wildcards, and many other things; Chapter 18 covers all the different kinds of patterns and what they do. The
+power of match comes from the expressiveness of the patterns and the fact that the compiler confirms that all possible
+cases are handled.
+
+____
+
+From this https://doc.rust-lang.org/book/ch06-02-match.html[page].
