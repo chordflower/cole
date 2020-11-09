@@ -14,7 +14,6 @@
       <name>carddamom</name>
       <email>carddamom@tutanota.com</email>
       <organization>chordflower</organization>
-      <url>https://carddamom.gitlab.io</url>
       <timezone>Europe/Lisbon</timezone>
     </developer>
   </developers>
@@ -27,14 +26,39 @@
     </license>
   </licenses>
   <properties>
-    <maven.compiler.source>13</maven.compiler.source>
-    <maven.compiler.target>13</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.debug>false</maven.compiler.debug>
+    <maven.compiler.parameters>true</maven.compiler.parameters>
+    <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
+    <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+    <maven.compiler.useIncrementalCompilation>true</maven.compiler.useIncrementalCompilation>
+    <maven.clean.retryOnError>true</maven.clean.retryOnError>
+    <maven.clean.followSymLinks>true</maven.clean.followSymLinks>
+
+    <!-- Versions -->
+    <byte-buddy.version>1.10.14</byte-buddy.version>
+    <caffeine.version>2.8.5</caffeine.version>
+    <jcommander.version>1.78</jcommander.version>
+    <vavr.version>1.0.0-alpha-3</vavr.version>
+    <auto-service-annotations.version>1.0-rc7</auto-service-annotations.version>
+    <auto-value-annotations.version>1.7.4</auto-value-annotations.version>
+    <antlr4.version>4.8</antlr4.version>
+    <log4j.version>1.7.30</log4j.version>
+    <logback.version>1.2.3</logback.version>
+    <annotations.version>20.1.0</annotations.version>
   </properties>
   <organization>
     <name>chordflower</name>
   </organization>
+  <distributionManagement>
+    <site>
+      <id>${project.artifactId}-site</id>
+      <url>${project.baseUri}</url>
+    </site>
+  </distributionManagement>
   <issueManagement>
     <system>github</system>
     <url>https://github.com/chordflower/cole/issues</url>
@@ -50,37 +74,72 @@
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
-        <version>1.10.14</version>
+        <version>${byte-buddy.version}</version>
       </dependency>
       <dependency>
         <groupId>com.github.ben-manes.caffeine</groupId>
         <artifactId>caffeine</artifactId>
-        <version>2.8.5</version>
+        <version>${caffeine.version}</version>
       </dependency>
       <dependency>
         <groupId>com.beust</groupId>
         <artifactId>jcommander</artifactId>
-        <version>1.78</version>
+        <version>${jcommander.version}</version>
       </dependency>
       <dependency>
         <groupId>io.vavr</groupId>
         <artifactId>vavr</artifactId>
-        <version>1.0.0-alpha-3</version>
+        <version>${vavr.version}</version>
       </dependency>
       <dependency>
         <groupId>com.google.auto.service</groupId>
         <artifactId>auto-service-annotations</artifactId>
-        <version>1.0-rc7</version>
+        <version>${auto-service-annotations.version}</version>
       </dependency>
       <dependency>
         <groupId>com.google.auto.value</groupId>
         <artifactId>auto-value-annotations</artifactId>
-        <version>1.7.4</version>
+        <version>${auto-value-annotations.version}</version>
       </dependency>
       <dependency>
         <groupId>org.antlr</groupId>
         <artifactId>antlr4</artifactId>
-        <version>4.8</version>
+        <version>${antlr4.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jetbrains</groupId>
+        <artifactId>annotations</artifactId>
+        <version>${annotations.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jul-to-slf4j</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>log4j-over-slf4j</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -90,6 +149,20 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.1.1</version>
+          <configuration>
+            <archive>
+              <addMavenDescriptor>true</addMavenDescriptor>
+              <compress>true</compress>
+              <index>true</index>
+              <manifest>
+                <addClasspath>true</addClasspath>
+                <addDefaultEntries>true</addDefaultEntries>
+                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                <addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>
+              </manifest>
+            </archive>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -124,8 +197,48 @@
           <version>3.0.0-M1</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.0.0-M5</version>
+          <configuration>
+            <enableAssertions>true</enableAssertions>
+            <reportFormat>plain</reportFormat>
+          </configuration>
+        </plugin>
+        <plugin>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.9.1</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.asciidoctor</groupId>
+              <artifactId>asciidoctor-maven-plugin</artifactId>
+              <version>2.1.0</version>
+            </dependency>
+            <dependency>
+              <groupId>com.puravida.asciidoctor</groupId>
+              <artifactId>asciidoctor-themes</artifactId>
+              <version>2.1.0</version>
+            </dependency>
+            <dependency>
+              <groupId>org.asciidoctor</groupId>
+              <artifactId>asciidoctorj-diagram</artifactId>
+              <version>2.0.5</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <asciidoc>
+              <attributes>
+                <icons>font</icons>
+                <source-highlighter>highlightjs</source-highlighter>
+                <highlightjs-theme>kimbie.light</highlightjs-theme>
+                <toclevels>6</toclevels>
+                <outdir>${basedir}/target/site</outdir>
+              </attributes>
+              <requires>
+                <require>asciidoctor-diagram</require>
+              </requires>
+            </asciidoc>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -136,6 +249,57 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>3.2.0</version>
+          <configuration>
+            <doclet>org.asciidoctor.Asciidoclet</doclet>
+            <docletArtifact>
+              <groupId>org.asciidoctor</groupId>
+              <artifactId>asciidoclet</artifactId>
+              <version>1.5.6</version>
+            </docletArtifact>
+            <overview>src/main/java/overview.adoc</overview>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>buildnumber-maven-plugin</artifactId>
+          <version>1.4</version>
+          <configuration>
+            <outputDirectory>${project.build.directory}/classes</outputDirectory>
+            <attach>true</attach>
+          </configuration>
+          <executions>
+            <execution>
+              <id>generate-properties</id>
+              <phase>generate-resources</phase>
+              <goals>
+                <goal>create-metadata</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>flatten-maven-plugin</artifactId>
+          <version>1.2.5</version>
+          <configuration>
+            <flattenMode>oss</flattenMode>
+          </configuration>
+          <executions>
+            <execution>
+              <id>flatten</id>
+              <phase>process-resources</phase>
+              <goals>
+                <goal>flatten</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>flatten.clean</id>
+              <phase>clean</phase>
+              <goals>
+                <goal>clean</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -181,9 +345,6 @@
             <configuration>
               <rules>
                 <banVulnerable implementation="org.sonatype.ossindex.maven.enforcer.BanVulnerableDependencies"/>
-                <requireJavaVersion>
-                  <version>[13.0.0,)</version>
-                </requireJavaVersion>
                 <requireMavenVersion>
                   <version>[3.6.3,)</version>
                 </requireMavenVersion>
@@ -199,7 +360,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.0.0</version>
         <reportSets>
           <reportSet>
             <reports>
@@ -222,11 +383,24 @@
             </reports>
           </reportSet>
         </reportSets>
+        <configuration>
+          <showAvatarImages>false</showAvatarImages>
+          <dependencyDetailsEnabled>true</dependencyDetailsEnabled>
+          <linkOnly>true</linkOnly>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>3.0.0-M5</version>
+        <version>3.0.0-M4</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>failsafe-report-only</report>
+              <report>report-only</report>
+            </reports>
+          </reportSet>
+        </reportSets>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -239,6 +413,42 @@
             </reports>
           </reportSet>
         </reportSets>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>2.0.0</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>third-party-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+        <configuration>
+          <includeOptional>true</includeOptional>
+          <sortByGroupIdAndArtifactId>true</sortByGroupIdAndArtifactId>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.7</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>dependency-updates-report</report>
+              <report>plugin-updates-report</report>
+              <report>property-updates-report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+        <configuration>
+          <allowAnyUpdates>true</allowAnyUpdates>
+          <allowDowngrade>false</allowDowngrade>
+          <processDependencyManagementTransitive>false</processDependencyManagementTransitive>
+          <processPluginDependenciesInPluginManagement>false</processPluginDependenciesInPluginManagement>
+        </configuration>
       </plugin>
     </plugins>
   </reporting>
