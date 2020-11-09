@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project name="${artifactId}"
   xmlns="http://maven.apache.org/DECORATION/1.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd">
@@ -11,11 +12,6 @@
     <menu ref="parent" />
     <menu ref="modules"/>
     <menu ref="reports" />
-    <menu name="About">
-      <item name="FAQ" href="faq.html"/>
-      <item name="Information" href="info.html"/>
-      <item name="Ideas" href="ideas.html"/>
-    </menu>
   </body>
   <poweredBy>
     <logo name="Maven" href="https://maven.apache.org/" img="https://maven.apache.org/images/logos/maven-feather.png"/>

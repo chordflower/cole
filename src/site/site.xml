@@ -11,11 +11,6 @@
     <menu ref="parent" />
     <menu ref="modules"/>
     <menu ref="reports" />
-    <menu name="About">
-      <item name="FAQ" href="faq.html"/>
-      <item name="Information" href="info.html"/>
-      <item name="Ideas" href="ideas.html"/>
-    </menu>
   </body>
   <poweredBy>
     <logo name="Maven" href="https://maven.apache.org/" img="https://maven.apache.org/images/logos/maven-feather.png"/>
