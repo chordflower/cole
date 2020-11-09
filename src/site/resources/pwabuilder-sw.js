@@ -2,10 +2,10 @@
 
 const CACHE = "pwabuilder-precache";
 
-importScripts('/scripts/workbox/workbox-sw.js');
+importScripts('/cole/scripts/workbox/workbox-sw.js');
 
 workbox.setConfig({
-  modulePathPrefix: '/scripts/workbox/'
+  modulePathPrefix: '/cole/scripts/workbox/'
 });
 
 self.addEventListener("message", (event) => {

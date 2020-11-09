@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="Dracpond"/>
 <meta name="application-name" content="Dracpond"/>
 <script type="module">
-  import '/scripts/pwaupdate.js';
+  import '/cole/scripts/pwaupdate.js';
   const el = document.createElement('pwa-update');
   document.body.appendChild(el);
 </script>
