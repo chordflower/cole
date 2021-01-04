@@ -45,7 +45,7 @@
     <vavr.version>1.0.0-alpha-3</vavr.version>
     <auto-service-annotations.version>1.0-rc7</auto-service-annotations.version>
     <auto-value-annotations.version>1.7.4</auto-value-annotations.version>
-    <antlr4.version>4.8</antlr4.version>
+    <antlr4.version>4.9</antlr4.version>
     <log4j.version>1.7.30</log4j.version>
     <logback.version>1.2.3</logback.version>
     <annotations.version>20.1.0</annotations.version>
